@@ -5,7 +5,7 @@ import TestViewer from './TestViewer';
 
 const fixtures = [];
 
-const requireFixtures = require.context('./fixtures', true, /\.(js|ts|tsx)$/);
+const requireFixtures = require.context('./fixtures', true, /\.\/(.*)\.(js|ts|tsx)$/);
 requireFixtures.keys().forEach((path) => {
   const [suite, name] = path
     .replace('./', '')
