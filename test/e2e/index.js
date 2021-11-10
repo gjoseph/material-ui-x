@@ -1,6 +1,6 @@
 import * as React from 'react';
 import ReactDOM from 'react-dom';
-import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 import TestViewer from './TestViewer';
 
 const fixtures = [];
@@ -47,7 +47,7 @@ function App() {
 
   return (
     <Router>
-      <Switch>
+      <Routes>
         {fixtures.map((fixture) => {
           const path = computePath(fixture);
           const FixtureComponent = fixture.Component;
@@ -57,14 +57,19 @@ function App() {
           }
 
           return (
-            <Route key={path} exact path={path}>
-              <TestViewer>
-                <FixtureComponent />
-              </TestViewer>
-            </Route>
+            <Route
+              key={path}
+              exact
+              path={path}
+              element={
+                <TestViewer>
+                  <FixtureComponent />
+                </TestViewer>
+              }
+            />
           );
         })}
-      </Switch>
+      </Routes>
       <div hidden={!isDev}>
         <p>
           Devtools can be enabled by appending <code>#dev</code> in the addressbar or disabled by
